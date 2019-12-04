@@ -21,17 +21,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CocktailFragment : Fragment() {
 
     lateinit var cocktail: Cocktail
-    companion object {
-       fun newInstance() = CocktailFragment()
-    }
-
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater?.inflate(R.layout.cocktail_fragment, container, false)
         return view
+    }
+
+
+    companion object {
+        fun newInstance() = CocktailFragment()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +53,14 @@ class CocktailFragment : Fragment() {
                 Picasso.get().load(cocktail.strDrinkThumb).into(view.cocktailImage)
                 view.cocktailName.text = cocktail.strDrink
                 this.cocktail = cocktail
+
+
                 fragmentLayout.setOnClickListener{
                     val bundle = bundleOf("cocktail" to Gson().toJson(cocktail))
                     findNavController(this).navigate(R.id.cocktailDetails, bundle )
                 }
+
+
             }, { error -> TODO() }
         )
 
